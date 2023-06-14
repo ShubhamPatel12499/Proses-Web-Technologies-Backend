@@ -16,7 +16,7 @@ app.use(express.json())
 app.use("/users",userRouter)
 
 
-app.listen(process.env.port,async()=>{
+app.listen(8080,async()=>{
     try{
         await connection
         console.log("Connected to DB")
@@ -25,7 +25,5 @@ app.listen(process.env.port,async()=>{
       console.log("Not connected to DB")
       console.log(err)
     }
-    console.log(`Server is running on ${process.env.port}`)
+    console.log(`Server is running on ${8080}`)
 })
-
-server:"nodemon index.js"
