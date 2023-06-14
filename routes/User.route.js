@@ -9,7 +9,7 @@ userRouter.get("/getUser", async(req,res)=>{
     try {
         const data = await userModel.find();
         res.send(data);
-        res.status(200).send("All the flights")
+        res.status(200).send("All the Users")
       } catch (err) {
         console.log(err);
       }
