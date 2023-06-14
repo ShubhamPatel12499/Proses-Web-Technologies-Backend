@@ -28,27 +28,7 @@ userRouter.get("/:id",async(req,res)=>{
 
 
 
-userRouter.patch("/:id", async(req,res)=>{
-    const payload = req.body
-    const id = req.params.id
-    const user = await userModel.findOne({"_id":id})
-    const userID_in_user=user.userID_in_user
-    const userID_making_req =req.body.userID
-    try{
-        if(userID_making_req!==userID_in_user)
-        {
-            res.send({"msg":"You are not authorized"})
-        }
-        else{
-            await userModel.findByIdAndUpdate({"_id":id},payload)
-            res.status(204).send("Updated the Data of User")
-        }
-    }
-    catch(err){
-        console.log(err)
-        res.send({"msg":"Something went wrong"})
-    }
-})
+
 
 userRouter.delete("/:id", async(req,res)=>{
     const id = req.params.id
@@ -72,6 +52,28 @@ userRouter.delete("/:id", async(req,res)=>{
 })
 
 userRouter.use(Validator);
+
+userRouter.patch("/:id", async(req,res)=>{
+    const payload = req.body
+    const id = req.params.id
+    const user = await userModel.findOne({"_id":id})
+    const userID_in_user=user.userID_in_user
+    const userID_making_req =req.body.userID
+    try{
+        if(userID_making_req!==userID_in_user)
+        {
+            res.send({"msg":"You are not authorized"})
+        }
+        else{
+            await userModel.findByIdAndUpdate({"_id":id},payload)
+            res.status(204).send("Updated the Data of User")
+        }
+    }
+    catch(err){
+        console.log(err)
+        res.send({"msg":"Something went wrong"})
+    }
+})
 
 userRouter.post("/addUser", async(req,res)=>{
     const payload = req.body;
